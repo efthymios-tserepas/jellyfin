@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check for sudo
+if [ "$EUID" -ne 0 ]; then
+    echo -e "\e[1;31mPlease run this script with sudo: sudo $0\e[0m"
+    exit 1
+fi
+
 if grep -qi "ubuntu" /etc/os-release; then
     # Update packages
     sudo apt update
